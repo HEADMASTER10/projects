@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 50px auto;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .choice {
+            padding: 10px 20px;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #007BFF;
+            background-color: transparent;
+            transition: 0.3s;
+        }
+        .choice:hover {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <p>Choose one:</p>
+        <div class="choices">
+            <button class="choice" id="rock">Rock</button>
+            <button class="choice" id="paper">Paper</button>
+            <button class="choice" id="scissors">Scissors</button>
+        </div>
+        <div class="result" id="result">Make your choice!</div>
+    </div>
+
+    <script>
+        const choices = ["rock", "paper", "scissors"];
+        const resultDiv = document.getElementById('result');
+
+        const getComputerChoice = () => {
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            return choices[randomIndex];
+        };
+
+        const determineWinner = (playerChoice, computerChoice) => {
+            if (playerChoice === computerChoice) return "It's a tie!";
+            if (
+                (playerChoice === "rock" && computerChoice === "scissors") ||
+                (playerChoice === "paper" && computerChoice === "rock") ||
+                (playerChoice === "scissors" && computerChoice === "paper")
+            ) {
+                return "You win!";
+            }
+            return "You lose!";
+        };
+
+        const playGame = (playerChoice) => {
+            const computerChoice = getComputerChoice();
+            const result = determineWinner(playerChoice, computerChoice);
+            resultDiv.textContent = `You chose ${playerChoice}, computer chose ${computerChoice}. ${result}`;
+        };
+
+        document.getElementById('rock').addEventListener('click', () => playGame('rock'));
+        document.getElementById('paper').addEventListener('click', () => playGame('paper'));
+        document.getElementById('scissors').addEventListener('click', () => playGame('scissors'));
+    </script>
+</body>
+</html>
